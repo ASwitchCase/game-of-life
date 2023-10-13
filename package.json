@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "bun build ./src/App.tsx --outfile=./dist/bundle.js",
-    "dev": "bun ./src/index.ts"
+    "start": "bun ./src/index.ts"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

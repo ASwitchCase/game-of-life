@@ -11,25 +11,17 @@ export class Cell {
      * @param neighbours 
      * @returns true if cell lives in next generation or false if it is dead
      */
-    transition(neighbours : boolean[]){
-        let live_neighbours = 0
+    transition = (neighbours : boolean[]) =>{
+        const transition_options = {
+            true : {2:true, 3:true,},
+            false : {3:true}
+        }
 
+        let live_neighbours = 0
         for(let neighbour of neighbours){
             if(neighbour == true) live_neighbours += 1
         }
-        if(this.is_alive){
-            if(live_neighbours < 2){ // underpopulation
-                return false
-            }else if(live_neighbours == 2 || live_neighbours == 3) { // stable population
-                return true
-            }else{ // overpopulation
-                return false
-            }
-        }else{
-            if(live_neighbours == 3){ // reproduction
-                return true
-            }
-        }
-        return false
+        let option = transition_options[String(this.is_alive) as keyof typeof transition_options] 
+        return option[live_neighbours as keyof typeof option] || false
     }
 }
